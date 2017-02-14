@@ -1,3 +1,9 @@
+
+this fork has working BandScanner on Devo10
+
+________
+* original Deviation readme
+
 The Deviation firmware project is hosted at http://www.deviationtx.com
 
 There you can find links to:
