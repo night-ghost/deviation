@@ -436,19 +436,24 @@ void PAGE_ScannerInit(int page)
     sp->use_cc2500=PROTOCOL_HasModule(PROTOCOL_FRSKYX);
 
 
+/*guiButton_t *button, u16 x, u16 y, u16 width, u16 height, const struct LabelDesc *desc,
+    const char *(*strCallback)(struct guiObject *, const void *),
+    void (*CallBack)(struct guiObject *obj, const void *data), const void *cb_data)
+*/    
+
     GUI_CreateButtonPlateText(&gui->enable, BUTTON2_X, BUTTON_Y, BUTTON2_WIDTH, LINE_HEIGHT, &DEFAULT_FONT,
-                              enablestr_cb, 0x0000, press_enable_cb, NULL);
+                              enablestr_cb, press_enable_cb, NULL);
 
     GUI_CreateButtonPlateText(&gui->scan_mode, BUTTON1_X, BUTTON_Y, BUTTON1_WIDTH, LINE_HEIGHT, &DEFAULT_FONT,
-                              modestr_cb, 0x0000, press_mode_cb, NULL);
+                              modestr_cb, press_mode_cb, NULL);
 
     GUI_CreateButtonPlateText(&gui->attenuator, BUTTON3_X, BUTTON_Y, BUTTON3_WIDTH, LINE_HEIGHT, &DEFAULT_FONT,
-                              attstr_cb, 0x0000, press_attenuator_cb, NULL);
+                              attstr_cb, press_attenuator_cb, NULL);
                               
 #if ENABLE_SCAN_CC2500
     if(sp->use_cc2500)
         GUI_CreateButtonPlateText(&gui->receiver, BUTTON4_X, BUTTON4_Y, BUTTON4_WIDTH, LINE_HEIGHT, &DEFAULT_FONT,
-                              recvstr_cb, 0x0000, press_recv_cb, NULL);
+                              recvstr_cb, press_recv_cb, NULL);
 #endif                  
 
     struct LabelDesc labelValue = MICRO_FONT;  // only digits, can use smaller font to show more channels

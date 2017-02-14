@@ -26,7 +26,6 @@ src/cov-int/
 *.dll
 *~
 *.pyc
-*.zip
 .DS_Store
 
 src/target/common/filesystems/devofs/tests/DevoFS.bs

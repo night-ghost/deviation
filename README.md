@@ -1,5 +1,5 @@
 
-this fork has working BandScanner on Devo10
+this fork has working BandScanner on Devo10 and useful About screen
 
 ________
 * original Deviation readme
