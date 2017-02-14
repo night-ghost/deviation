@@ -46,7 +46,16 @@ u16 scan_cb()
             CYRF_ReadRegister(CYRF_13_RSSI); //dummy read
             Delay(15);
         }
+
+#if defined(EMULATOR) 
+        int rssi = sp->channel>32?64-sp->channel:sp->channel;
+        if(rssi <0) rssi=16;
+        
+        rssi &= 0x1F;
+#else
         int rssi = CYRF_ReadRegister(CYRF_13_RSSI) & 0x1F;
+#endif
+
         if(sp->scan_mode) {
             sp->channelnoise[sp->channel] = (sp->channelnoise[sp->channel] + rssi) / 2;
         } else {

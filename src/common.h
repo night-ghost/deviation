@@ -230,4 +230,8 @@ const char *GetBoxSource(char *str, int src);
 const char *GetBoxSourceReal(char *str, int src);
 void RemapChannelsForProtocol(const u8 *oldmap);
 #define PPMin_Mode() (Model.num_ppmin >> 6)
+
+typedef void (*VoidFuncPtr)();
+extern VoidFuncPtr on_idle_loop;
+
 #endif

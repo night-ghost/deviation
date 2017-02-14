@@ -35,6 +35,8 @@ void TOUCH_Handler(); // temporarily in main()
 void VIDEO_Update();
 void PAGE_Test();
 
+VoidFuncPtr on_idle_loop;
+
 #ifndef DUMP_BOOTLOADER
 int main() {
     
@@ -102,6 +104,7 @@ int main() {
         //and has been disabled in common/devo/power.c
         //but it helps a huge amount for the emulator
         PWR_Sleep();
+        if(on_idle_loop) on_idle_loop();
     }
 #endif
 }

@@ -114,7 +114,8 @@ void PWR_Shutdown();
 void PWR_Sleep();
 
 /* Clock functions */
-#define LOW_PRIORITY_MSEC 100
+//#define LOW_PRIORITY_MSEC 100
+#define LOW_PRIORITY_MSEC 50
 #define MEDIUM_PRIORITY_MSEC   5
 enum MsecCallback {
     MEDIUM_PRIORITY,

@@ -17,20 +17,67 @@
 #include "common.h"
 #include "pages.h"
 #include "gui/gui.h"
+#include "../../protocol/interface.h"
+#include "../../protocol/iface_cyrf6936.h"
 
 enum {
     ROW_1_X = 0,
-    ROW_1_Y = 15,
     ROW_2_X = 0,
-    ROW_2_Y = 30,
     ROW_3_X = 0,
-    ROW_3_Y = 45
+    ROW_4_X = 0,
+    ROW_5_X = 0,
 };
+
+#define ROW_1_Y (LINE_HEIGHT + 2)
+#define ROW_2_Y (LINE_HEIGHT + ROW_1_Y)
+#define ROW_3_Y (LINE_HEIGHT + ROW_2_Y +6)
+#define ROW_4_Y (LINE_HEIGHT + ROW_3_Y -1)
+
 #endif //OVERRIDE_PLACEMENT
+
 
 
 static struct usb_page  * const up = &pagemem.u.usb_page;
 static struct about_obj * const gui = &gui_objs.u.about;
+
+static const char *lbl2_cb(guiObject_t *obj, const void *data)
+{
+    (void)obj;
+    (void)data;
+
+    tempstring_cpy((const char *) _tr("Deviation FW version:"));
+    return tempstring;
+}
+
+static const char *lbl4_cb(guiObject_t *obj, const void *data)
+{
+    (void)obj;
+    (void)data;
+
+    CYRF_Reset();
+    u8 Power = CYRF_MaxPower();
+    sprintf(tempstring, "Power  : %s\n",Power == CYRF_PWR_100MW ? "100mW" : "10mW" );
+    return tempstring;
+}
+static const char *lbl5_cb(guiObject_t *obj, const void *data)
+{
+    (void)obj;
+    (void)data;
+
+    u8 mfgdata[6];
+
+    CYRF_GetMfgData(mfgdata);
+    sprintf(tempstring ,"CYRF Mfg: %02X %02X %02X %02X %02X %02X\n",
+            mfgdata[0],
+            mfgdata[1],
+            mfgdata[2],
+            mfgdata[3],
+            mfgdata[4],
+            mfgdata[5]);
+    
+
+    return tempstring;
+}
 
 void PAGE_AboutInit(int page)
 {
@@ -38,8 +85,19 @@ void PAGE_AboutInit(int page)
     PAGE_RemoveAllObjects();
     PAGE_ShowHeader(PAGE_GetName(PAGEID_ABOUT));
 
-    tempstring_cpy((const char *) _tr("Deviation FW version:"));
-    GUI_CreateLabelBox(&gui->label[0], ROW_1_X, ROW_1_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, NULL, NULL, "www.deviationtx.com");
-    GUI_CreateLabelBox(&gui->label[1], ROW_2_X, ROW_2_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, NULL, NULL, tempstring);
-    GUI_CreateLabelBox(&gui->label[2], ROW_3_X, ROW_3_Y, LCD_WIDTH, LINE_HEIGHT, &MICRO_FONT, NULL, NULL, _tr_noop(DeviationVersion));
+    
+    GUI_CreateLabelBox(&gui->label[1], ROW_1_X, ROW_1_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, lbl2_cb, NULL, NULL);
+    GUI_CreateLabelBox(&gui->label[2], ROW_2_X, ROW_2_Y, LCD_WIDTH, LINE_HEIGHT, &MICRO_FONT, NULL, NULL, _tr_noop(DeviationVersion));
+
+    GUI_CreateLabelBox(&gui->label[3], ROW_3_X, ROW_3_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, lbl4_cb, NULL, NULL);
+    GUI_CreateLabelBox(&gui->label[4], ROW_4_X, ROW_4_Y, LCD_WIDTH, LINE_HEIGHT, &MICRO_FONT, lbl5_cb,NULL, NULL);
+    
+/*
+    u8 tmp[12];
+
+    printf("BootLoader    : '%s'\n",tmp);
+    printf("SPI Flash     : '%X'\n",(unsigned int)SPIFlash_ReadID());
+
+
+*/
 }

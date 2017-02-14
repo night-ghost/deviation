@@ -54,11 +54,24 @@ void GUI_DrawBarGraph(struct guiObject *obj)
     struct guiBox *box = &obj->box;
     struct guiBarGraph *graph = (struct guiBarGraph *)obj;
     struct disp_bargraph *disp;
-    int height = box->height - 2;
-    int width  = box->width - 2;
-    int x = box->x + 1;
-    int y = box->y + 1;
-
+    
+    int height;
+    int width;
+    int x;
+    int y;
+    
+    if(box->height<3 || box->width < 3) {
+        y = box->y;
+        x = box->x;
+        height = box->height;
+        width  = box->width;
+    } else {
+        height = box->height - 2;
+        width  = box->width - 2;
+        x = box->x + 1;
+        y = box->y + 1;
+    }
+    
     disp = graph->direction == BAR_HORIZONTAL ||
            graph->direction == BAR_VERTICAL
              ? &Display.bargraph

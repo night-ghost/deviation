@@ -3,6 +3,7 @@
 
 #include "../common/_pages.h"
 #include "guiobj.h"
+#include "scanner_page.h"
 
 struct pagemem {
     union {
@@ -14,13 +15,14 @@ struct pagemem {
         struct timer_page timer_page;
         struct chantest_page chantest_page;
         struct range_page range_page;
-        //struct scanner_page scanner_page;
         struct usb_page usb_page;
         struct tx_configure_page tx_configure_page;
         struct telemtest_page telemtest_page;
         struct telemconfig_page telemconfig_page;
         struct toggle_select_page toggle_select_page;
-
+#if HAS_SCANNER
+        struct scanner_page scanner_page;
+#endif
         struct menu_page menu_page;
     } u;
     u8 modal_page;

@@ -149,9 +149,12 @@ ifdef MODULAR
 CFLAGS   +=  -DMODULAR=$(MODULAR)
 endif
 
+OPTFLAGS := -fno-aggressive-loop-optimizations -fmerge-all-constants -fmerge-constants -finline-functions-called-once -finline-small-functions
+OPTFLAGS += -fassociative-math -freciprocal-math -fno-signed-zeros -fno-trapping-math -fsingle-precision-constant
+
 CFLAGS   := $(CFLAGS) -Wall -Wextra -Werror=undef -I. -D$(PROGMODE) -std=gnu99 -Itarget/$(TARGET) -Igui/$(SCREENSIZE) \
             -Ipages/$(SCREENSIZE) \
-            -DHGVERSION="\"${HGVERSION}\""
+            -DHGVERSION="\"${HGVERSION}\"" $(OPTFLAGS)
 CXXFLAGS := $(CXXFLAGS) $(patsubst -std=gnu99,,$(CFLAGS))
 EXEEXT   ?= elf
 ##################################################

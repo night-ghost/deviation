@@ -128,7 +128,11 @@ int CYRF_Reset()
 
 u8 CYRF_MaxPower()
 {
+#if defined(EMULATOR)
+    return CYRF_PWR_100MW ;
+#else
     return (*((u8*)0x08001007) == 0) ? CYRF_PWR_100MW : CYRF_PWR_10MW;
+#endif
 }
 /*
  *

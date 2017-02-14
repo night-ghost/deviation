@@ -203,8 +203,9 @@ struct reorder_obj {
 struct scanner_obj {
     guiButton_t enable;
     guiButton_t scan_mode;
+    guiButton_t receiver;
     guiButton_t attenuator;
-    guiBarGraph_t bar[80];
+    guiBarGraph_t bar[128];
 };
 
 struct telemcfg_obj {

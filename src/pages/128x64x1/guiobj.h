@@ -1,7 +1,8 @@
 #ifndef _GUIOBJ_H_
 #define _GUIOBJ_H_
+
 struct about_obj {
-    guiLabel_t label[3];
+    guiLabel_t label[6];
 };
 
 struct splash_obj {
@@ -335,6 +336,17 @@ struct stdtravel_obj {
     guiScrollable_t scrollable;
 };
 
+struct scanner_obj {
+    guiButton_t enable;
+    guiButton_t scan_mode;
+    guiButton_t receiver;
+    guiButton_t attenuator;
+    guiBarGraph_t bar[128];
+    guiLabel_t freq_l;
+    guiLabel_t freq_m;
+    guiLabel_t freq_r;
+};
+
 struct gui_objs {
     struct dialog_obj dialog;
     union {
@@ -380,7 +392,13 @@ struct gui_objs {
         struct stdtravel_obj stdtravel;
         struct stdchan_obj stdchan;
         struct toggleselect_obj toggleselect;
+#if HAS_SCANNER
+        struct scanner_obj scanner;
+#endif
     } u;
 } gui_objs;
+
+
+
 
 #endif //_GUIOBJ_H_
