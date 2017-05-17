@@ -456,7 +456,7 @@ void PAGE_ScannerInit(int page)
                               recvstr_cb, press_recv_cb, NULL);
 #endif                  
 
-    struct LabelDesc labelValue = MICRO_FONT;  // only digits, can use smaller font to show more channels
+    struct LabelDesc labelValue = TINY_FONT;  // only digits, can use smaller font to show more channels
 
     u8 height = LABEL_CHAN_H;
 

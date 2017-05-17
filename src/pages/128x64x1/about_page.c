@@ -87,10 +87,10 @@ void PAGE_AboutInit(int page)
 
     
     GUI_CreateLabelBox(&gui->label[1], ROW_1_X, ROW_1_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, lbl2_cb, NULL, NULL);
-    GUI_CreateLabelBox(&gui->label[2], ROW_2_X, ROW_2_Y, LCD_WIDTH, LINE_HEIGHT, &MICRO_FONT, NULL, NULL, _tr_noop(DeviationVersion));
+    GUI_CreateLabelBox(&gui->label[2], ROW_2_X, ROW_2_Y, LCD_WIDTH, LINE_HEIGHT, &TINY_FONT, NULL, NULL, _tr_noop(DeviationVersion));
 
     GUI_CreateLabelBox(&gui->label[3], ROW_3_X, ROW_3_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, lbl4_cb, NULL, NULL);
-    GUI_CreateLabelBox(&gui->label[4], ROW_4_X, ROW_4_Y, LCD_WIDTH, LINE_HEIGHT, &MICRO_FONT, lbl5_cb,NULL, NULL);
+    GUI_CreateLabelBox(&gui->label[4], ROW_4_X, ROW_4_Y, LCD_WIDTH, LINE_HEIGHT, &TINY_FONT, lbl5_cb,NULL, NULL);
     
 /*
     u8 tmp[12];

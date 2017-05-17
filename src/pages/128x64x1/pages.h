@@ -23,6 +23,9 @@ struct pagemem {
 #if HAS_SCANNER
         struct scanner_page scanner_page;
 #endif
+#if HAS_MUSIC_CONFIG
+        struct voiceconfig_page voiceconfig_page;
+#endif
         struct menu_page menu_page;
     } u;
     u8 modal_page;
@@ -48,9 +51,8 @@ struct pagemem {
 #define TOGGLEICON_WIDTH 8
 #define TOGGLEICON_HEIGHT 11
 
-extern struct LabelDesc labelDesc;
 void PAGE_SaveMixerSetup(struct mixer_page * const mp);
-void PAGE_ShowHeaderWithHeight(const char *title, u8 font, u8 width, u8 height);
+//void PAGE_ShowHeaderWithSize(const char *title, u8 width, u8 height);
 void PAGE_ChangeByID(enum PageID id, s8 page);
 
 void PAGE_NavigateItems(s8 direction, u8 view_id, u8 total_items, s8 *selectedIdx, s16 *view_origin_relativeY,
