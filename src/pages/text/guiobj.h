@@ -213,6 +213,12 @@ struct usb_obj {
     guiLabel_t label;
 };
 
+#define DEBUG_LINE_COUNT SCROLLABLE_ROWS
+struct debuglog_obj {
+    guiLabel_t      line[DEBUG_LINE_COUNT];
+    guiScrollable_t scrollable;
+};
+
 #ifdef HAS_MUSIC_CONFIG
 struct voiceconfig_obj {
     guiLabel_t msg;
@@ -224,12 +230,15 @@ struct voiceconfig_obj {
 };
 #endif
 
+<<<<<<< HEAD
 #define DEBUG_LINE_COUNT SCROLLABLE_ROWS
 struct debuglog_obj {
     guiLabel_t      line[DEBUG_LINE_COUNT];
     guiScrollable_t scrollable;
 };
 
+=======
+>>>>>>> ef040240dd64823e1c51fbf05536c640410c74b6
 /****Advanced ****/
 struct advcurve_obj {
     guiTextSelect_t name;
@@ -306,7 +315,10 @@ struct stddrexp_obj {
     guiTextSelect_t value2[3];
     guiXYGraph_t graph;
     guiScrollable_t scrollable;
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef040240dd64823e1c51fbf05536c640410c74b6
 };
 
 struct stdchan_obj {
@@ -381,6 +393,10 @@ struct gui_objs {
         struct tx_obj tx;
         struct calibrate_obj calibrate;
         struct usb_obj usb;
+<<<<<<< HEAD
+=======
+        struct debuglog_obj debuglog;
+>>>>>>> ef040240dd64823e1c51fbf05536c640410c74b6
 #ifdef HAS_MUSIC_CONFIG
         struct voiceconfig_obj voiceconfig;
 #endif

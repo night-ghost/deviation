@@ -85,7 +85,6 @@ void PAGE_AboutInit(int page)
     PAGE_RemoveAllObjects();
     PAGE_ShowHeader(PAGE_GetName(PAGEID_ABOUT));
 
-    
     GUI_CreateLabelBox(&gui->label[1], ROW_1_X, ROW_1_Y, LCD_WIDTH, LINE_HEIGHT, &DEFAULT_FONT, lbl2_cb, NULL, NULL);
     GUI_CreateLabelBox(&gui->label[2], ROW_2_X, ROW_2_Y, LCD_WIDTH, LINE_HEIGHT, &TINY_FONT, NULL, NULL, _tr_noop(DeviationVersion));
 

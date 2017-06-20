@@ -74,6 +74,7 @@ enum{
 static const char * const afhds2a_opts[] = {
     _tr_noop("Outputs"), "PWM/IBUS", "PPM/IBUS", "PWM/SBUS", "PPM/SBUS", NULL,
     _tr_noop("Servo Hz"), "50", "400", "5", NULL,
+    _tr_noop("LQI output"), "None", "Ch5", "Ch6", "Ch7", "Ch8", "Ch9", "Ch10", "Ch11", "Ch12", NULL,
     "RX ID", "-32768", "32767", "1", NULL, // todo: store that elsewhere
     "RX ID2","-32768", "32767", "1", NULL, // ^^^^^^^^^^^^^^^^^^^^^^^^^^
     NULL
@@ -89,6 +90,7 @@ enum {
 enum {
     PROTOOPTS_OUTPUTS = 0,
     PROTOOPTS_SERVO_HZ,
+    PROTOOPTS_LQI_OUT,
     PROTOOPTS_RXID, // todo: store that elsewhere
     PROTOOPTS_RXID2,// ^^^^^^^^^^^^^^^^^^^^^^^^^^
     LAST_PROTO_OPT,
@@ -203,6 +205,12 @@ static void build_sticks_packet()
         packet[9 +  ch*2] = value & 0xff;
         packet[10 + ch*2] = (value >> 8) & 0xff;
     }
+    // override channel with telemetry LQI
+    if(Model.proto_opts[PROTOOPTS_LQI_OUT] > 0) {
+        u16 val = 1000 + (Telemetry.value[TELEM_FRSKY_LQI] * 10);
+        packet[17+((Model.proto_opts[PROTOOPTS_LQI_OUT]-1)*2)] = val & 0xff;
+        packet[18+((Model.proto_opts[PROTOOPTS_LQI_OUT]-1)*2)] = (val >> 8) & 0xff;
+    }
     packet[37] = 0x00;
 }
 
@@ -314,7 +322,7 @@ static void update_telemetry()
                 break;
 #if HAS_EXTENDED_TELEMETRY
             case SENSOR_TEMPERATURE:
-                Telemetry.value[TELEM_FRSKY_TEMP1] = (packet[index+3]<<8 | packet[index+2]) - 400;
+                Telemetry.value[TELEM_FRSKY_TEMP1] = ((packet[index+3]<<8 | packet[index+2]) - 400)/10;
                 TELEMETRY_SetUpdated(TELEM_FRSKY_TEMP1);
                 break;
             case SENSOR_CELL_VOLTAGE:

@@ -25,7 +25,7 @@ const char *MODEL_TEMPLATE;
 
 //This cannot be computed, and must be manually updated
 #define NUM_PROTO_OPTS 5
-#define VIRT_NAME_LEN 10
+#define VIRT_NAME_LEN 10 
 
 struct Model {
     u32 fixed_id;
